@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domине JavaScript - Curso Online Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #00d4ff;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* HEADER E NAVEGAÇÃO */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 102, 204, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            margin-top: 80px;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            color: #cbd5e1;
+            margin-top: 0.5rem;
+        }
+
+        /* SEÇÃO BENEFÍCIOS */
+        .benefits {
+            padding: 5rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .benefits-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 102, 204, 0.15);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* SEÇÃO CONTEÚDO DO CURSO */
+        .curriculum {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .curriculum-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .curriculum-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .curriculum-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .curriculum-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .curriculum-item-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            min-width: 40px;
+        }
+
+        .curriculum-item-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .curriculum-item-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .curriculum-image {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 212, 255, 0.1));
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        /* SEÇÃO PROVA SOCIAL */
+        .testimonials {
+            padding: 5rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .stars {
+            color: var(--warning-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .testimonial-info p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* SEÇÃO PRICING */
+        .pricing {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .price-card {
+            background: var(--light-bg);
+            padding: 2.5rem;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .price-card.featured {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05), rgba(0, 212, 255, 0.05));
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 102, 204, 0.2);
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--warning-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .price-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .price-card .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 1.5rem 0;
+        }
+
+        .price-card .original-price {
+            text-decoration: line-through;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-left: 0.5rem;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .price-card li {
+            padding: 0.8rem 0;
+            color: var(--text-dark);
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .price-card li::before {
+            content: "✓";
+            color: var(--success-color);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        /* SEÇÃO CTA FINAL */
+        .final-cta {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+        }
+
+        .guarantee {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success-color);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .guarantee h3 {
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0a0f1a;
+            color: #94a3b8;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .curriculum-content {
+                grid-template-columns: 1fr;
+            }
+
+            .price-card.featured {
+                transform: scale(1);
+            }
+
+            .final-cta h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">CodeMaster</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#beneficios">Benefícios</a></li>
+                    <li><a href="#curriculum">Conteúdo</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#pricing">Preços</a></li>
+                </ul>
+            </nav>
+            <a href="#modal" class="cta-header">Quero Aprender</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">⭐ LANÇAMENTO ESPECIAL - 70% OFF</div>
+            <h1>Domine JavaScript e Transforme Sua Carreira</h1>
+            <p class="subtitle">
+                Aprenda com um dos melhores desenvolvedores da América Latina. Saia do zero até conseguir seus primeiros projetos bem remunerados em apenas 12 semanas.
+            </p>
+            <div class="hero-cta">
+                <button class="btn btn-primary" onclick="openModal()">
+                    Garantir Minha Vaga Agora
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('testimonials')">
+                    Ver Depoimentos
+                </button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat fade-in delay-1">
+                    <div class="stat-number">12.500+</div>
+                    <div class="stat-label">Alunos Satisfeitos</div>
+                </div>
+                <div class="stat fade-in delay-2">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Taxa de Satisfação</div>
+                </div>
+                <div class="stat fade-in delay-3">
+                    <div class="stat-number">4.9★</div>
+                    <div class="stat-label">Avaliação Média</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section id="beneficios" class="benefits">
+        <h2 class="section-title">Por que escolher nosso curso?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card fade-in delay-1">
+                <div class="benefit-icon">🎯</div>
+                <h3>Foco na Prática</h3>
+                <p>70% de exercícios práticos. Você vai codar desde a primeira aula e construir projetos reais.</p>
+            </div>
+            <div class="benefit-card fade-in delay-2">
+                <div class="benefit-icon">👨‍🏫</div>
+                <h3>Instrutor Expert</h3>
+                <p>Professor com 15 anos de experiência em desenvolvimento web e tech startups de sucesso.</p>
+            </div>
+            <div class="benefit-card fade-in delay-3">
+                <div class="benefit-icon">💼</div>
+                <h3>Oportunidades</h3>
+                <p>Acesso exclusivo a oportunidades freelancer e job board para alunos que concluem o curso.</p>
+            </div>
+            <div class="benefit-card fade-in delay-1">
+                <div class="benefit-icon">🏆</div>
+                <h3>Certificado Reconhecido</h3>
+                <p>Certificado digital que comprova suas habilidades no mercado de trabalho.</p>
+            </div>
+            <div class="benefit-card fade-in delay-2">
+                <div class="benefit-icon">🚀</div>
+                <h3>Suporte Vitalício</h3>
+                <p>Acesso permanente ao material, atualizações gratuitas e comunidade ativa 24/7.</p>
+            </div>
+            <div class="benefit-card fade-in delay-3">
+                <div class="benefit-icon">💰</div>
+                <h3>Retorno Garantido</h3>
+                <p>Ou seu dinheiro de volta em 30 dias. Sem perguntas. Confiamos em nosso produto.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CURRICULUM -->
+    <section id="curriculum" class="curriculum">
+        <div class="curriculum-container">
+            <h2 class="section-title">O que você vai aprender</h2>
+            <div class="curriculum-content">
+                <div class="curriculum-list">
+                    <div class="curriculum-item fade-in delay-1">
+                        <div class="curriculum-item-number">01</div>
+                        <div class="curriculum-item-content">
+                            <h4>Fundamentos de JavaScript</h4>
+                            <p>Variáveis, tipos de dados, operadores, estruturas de controle e funções do zero.</p>
+                        </div>
+                    </div>
+                    <div class="curriculum-item fade-in delay-2">
+                        <div class="curriculum-item-number">02</div>
+                        <div class="curriculum-item-content">
+                            <h4>DOM e Interatividade</h4>
+                            <p>Manipule o DOM, crie interações incríveis e trabalhe com eventos.</p>
+                        </div>
+                    </div>
+                    <div class="curriculum-item fade-in delay-3">
+                        <div class="curriculum-item-number">03</div>
+                        <div class="curriculum-item-content">
+                            <h4>Programação Orientada a Objetos</h4>
+                            <p>Classes, protótipos, herança e padrões de design profissionais.</p>
+                        </div>
+                    </div>
+                    <div class="curriculum-item fade-in delay-1">
+                        <div class="curriculum-item-number">04</div>
+                        <div class="curriculum-item-content">
+                            <h4>APIs e Dados Reais</h4>
+                            <p>Integre com APIs REST, trabalhe com JSON e construa aplicações dinâmicas.</p>
+                        </div>
+                    </div>
+                    <div class="curriculum-item fade-in delay-2">
+                        <div class="curriculum-item-number">05</div>
+                        <div class="curriculum-item-content">
+                            <h4>Projetos Profissionais</h4>
+                            <p>3 projetos completos para seu portfólio: To-Do App, Chat e E-commerce.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="curriculum-image">
+                    📚
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTOR -->
+    <section class="instructor">
+        <div class="instructor-container">
+            <h2 class="section-title">Conheça Seu Instrutor</h2>
+            <div class="instructor-content">
+                <div class="instructor-avatar-large">👨‍💼</div>
+                <div class="instructor-info">
+                    <h3>Roberto da Silva</h3>
+                    <p class="instructor-title">Desenvolvedor Full-Stack & Educador</p>
+                    <div class="instructor-stats">
+                        <div class="instructor-stat">
+                            <span class="stat-value">15+</span>
+                            <span class="stat-label">Anos de Experiência</span>
+                        </div>
+                        <div class="instructor-stat">
+                            <span class="stat-value">50+</span>
+                            <span class="stat-label">Projetos Realizados</span>
+                        </div>
+                        <div class="instructor-stat">
+                            <span class="stat-value">12K+</span>
+                            <span class="stat-label">Alunos Transformados</span>
+                        </div>
+                    </div>
+                    <p class="instructor-bio">
+                        Trabalhou em startups unicórnios e empresas Fortune 500. Formado em Ciência da Computação pela USP, com certificações em Web Development e Cloud Computing. Especialista em tornar conteúdo complexo simples e acessível.
+                    </p>
+                    <div class="instructor-achievements">
+                        <p><strong>🏆 Reconhecimentos:</strong></p>
+                        <ul style="list-style: none; margin-top: 0.8rem;">
+                            <li>✓ Melhor Professor Digital 2024 - Prêmio TechEdu</li>
+                            <li>✓ Top 100 Educadores Tech - LinkedIn</li>
+                            <li>✓ 4.9/5 ⭐ em 5000+ avaliações</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title">Histórias de Sucesso dos Nossos Alunos</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card fade-in delay-1">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Comecei do zero e em 3 meses consegui meu primeiro freelancer ganhando R$ 3.000! O curso é excelente, prático e o professor é muito paciente. Já recuperei o investimento."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">AJ</div>
+                    <div class="testimonial-info">
+                        <h4>Ana Jessica</h4>
+                        <p>Desenvolvedora Frontend • 6 meses</p>
+                    </div>
+                </div>
+                <div class="testimonial-badge">Ganhou + R$ 15K</div>
+            </div>
+            <div class="testimonial-card fade-in delay-2">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Mudei de carreira aos 38 anos. Parecia impossível, mas o curso me mostrou que nunca é tarde. Agora trabalho como desenvolvedor full-time em uma empresa top, com salário 3x maior."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">MC</div>
+                    <div class="testimonial-info">
+                        <h4>Marcos Cruz</h4>
+                        <p>Desenvolvedor Senior • 8 meses</p>
+                    </div>
+                </div>
+                <div class="testimonial-badge">Conseguiu Emprego</div>
+            </div>
+            <div class="testimonial-card fade-in delay-3">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"O melhor investimento que fiz em 2024. Qualidade incomparável, suporte excepcional e resultados reais. Meu portfólio ficou impressionante. Recomendo!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">LN</div>
+                    <div class="testimonial-info">
+                        <h4>Letícia Nunes</h4>
+                        <p>Empreendedora Digital • 4 meses</p>
+                    </div>
+                </div>
+                <div class="testimonial-badge">Lançou Startup</div>
+            </div>
+            <div class="testimonial-card fade-in delay-1">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Como designer, queria aprender a codar meus projetos. Este curso me abriu as portas para dev full-stack. Agora consigo criar tudo do zero!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">PS</div>
+                    <div class="testimonial-info">
+                        <h4>Patricia Souza</h4>
+                        <p>Designer + Dev • 5 meses</p>
+                    </div>
+                </div>
+                <div class="testimonial-badge">Carreira Expandida</div>
+            </div>
+            <div class="testimonial-card fade-in delay-2">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"Estava desempregado por 8 meses. O curso me deu confiança e habilidades reais. Passei em 3 entrevistas e escolhi a melhor oportunidade!"</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">RL</div>
+                    <div class="testimonial-info">
+                        <h4>Rafael Lima</h4>
+                        <p>Dev Júnior • 6 meses</p>
+                    </div>
+                </div>
+                <div class="testimonial-badge">Recolocado</div>
+            </div>
+            <div class="testimonial-card fade-in delay-3">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">"O suporte foi impecável! Sempre que tinha dúvida, recebia resposta rápida. Isso fez toda diferença na minha jornada de aprendizado."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">CB</div>
+                    <div class="testimonial-info">
+                        <h4>Carla Bastos</h4>
+                        <p>Dona de Negócio • 3 meses</p>
+                    </div>
+                </div>
+                <div class="testimonial-badge">Suporte VIP</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BÔNUS EXCLUSIVOS -->
+    <section class="bonuses">
+        <h2 class="section-title">Bônus Exclusivos Inclusos</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Quando você se inscrever hoje, vai receber estes bônus no valor de R$ 1.200 completamente GRÁTIS
+        </p>
+        <div class="bonuses-grid">
+            <div class="bonus-card fade-in delay-1">
+                <div class="bonus-icon">🎁</div>
+                <h3>Templates Profissionais</h3>
+                <p>12 templates HTML/CSS/JS prontos para usar nos seus projetos e portfólio</p>
+                <p class="bonus-price">Valor: R$ 300</p>
+            </div>
+            <div class="bonus-card fade-in delay-2">
+                <div class="bonus-icon">📚</div>
+                <h3>E-book Carreira Tech</h3>
+                <p>Guia completo de como conseguir seu primeiro emprego na área de tecnologia</p>
+                <p class="bonus-price">Valor: R$ 150</p>
+            </div>
+            <div class="bonus-card fade-in delay-3">
+                <div class="bonus-icon">🔧</div>
+                <h3>10 Ferramentas Premium</h3>
+                <p>Acesso grátis a 10 ferramentas premium para desenvolvimento (3 meses)</p>
+                <p class="bonus-price">Valor: R$ 400</p>
+            </div>
+            <div class="bonus-card fade-in delay-1">
+                <div class="bonus-icon">🎓</div>
+                <h3>Masterclass Exclusiva</h3>
+                <p>Sessão de 2 horas com o instrutor sobre desenvolvimento avançado em JavaScript</p>
+                <p class="bonus-price">Valor: R$ 200</p>
+            </div>
+            <div class="bonus-card fade-in delay-2">
+                <div class="bonus-icon">💼</div>
+                <h3>Resume Builder</h3>
+                <p>Ferramenta para criar currículo profissional com portfólio integrado</p>
+                <p class="bonus-price">Valor: R$ 100</p>
+            </div>
+            <div class="bonus-card fade-in delay-3">
+                <div class="bonus-icon">🚀</div>
+                <h3>Comunidade VIP 3 Meses</h3>
+                <p>Acesso a grupo exclusivo com outros alunos para networking e parcerias</p>
+                <p class="bonus-price">Valor: R$ 50</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="faq-container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-grid">
+                <div class="faq-item fade-in delay-1">
+                    <h3>Preciso de experiência prévia em programação?</h3>
+                    <p>Não! O curso começa do zero absoluto. Se você nunca programou, este é o lugar certo. Temos alunos de todas as idades e backgrounds começando do ZERO.</p>
+                </div>
+                <div class="faq-item fade-in delay-2">
+                    <h3>Quanto tempo leva para aprender?</h3>
+                    <p>A maioria dos alunos completa o curso em 12 semanas estudando 5-7 horas por semana. Mas você tem acesso vitalício, então pode aprender no seu próprio ritmo.</p>
+                </div>
+                <div class="faq-item fade-in delay-3">
+                    <h3>Como recebo o acesso ao curso?</h3>
+                    <p>Após a inscrição, você recebe um link de acesso instantaneamente no seu email. Pode começar a assistir as aulas em minutos! Acesso 100% online.</p>
+                </div>
+                <div class="faq-item fade-in delay-1">
+                    <h3>Posso assistir nos meus dispositivos?</h3>
+                    <p>Sim! Você pode assistir no computador, tablet, smartphone ou smart TV. A plataforma é totalmente responsiva e salva seu progresso automaticamente.</p>
+                </div>
+                <div class="faq-item fade-in delay-2">
+                    <h3>O curso é atualizado?</h3>
+                    <p>Sim! Atualizações completamente grátis para sempre. Conforme novas features do JavaScript surgem, adicionamos novo conteúdo. Você nunca fica defasado.</p>
+                </div>
+                <div class="faq-item fade-in delay-3">
+                    <h3>E se eu não gostar?</h3>
+                    <p>Sem problema! Temos garantia de 30 dias sem riscos. Se não gostar pelos motivos que forem, devolvemos 100% do seu dinheiro, sem perguntas incômodas.</p>
+                </div>
+                <div class="faq-item fade-in delay-1">
+                    <h3>Qual é o certificado válido?</h3>
+                    <p>O certificado é digital, verificável online e reconhecido no mercado. Você pode adicionar ao LinkedIn e mostrar aos empregadores suas habilidades comprovadas.</p>
+                </div>
+                <div class="faq-item fade-in delay-2">
+                    <h3>Consigo gerar renda com o curso?</h3>
+                    <p>Absolutamente! Muitos alunos começam a fazer freelancer já no 3º mês. Oferecemos job board exclusivo com oportunidades reais de trabalho remunerado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="pricing">
+        <div class="pricing-container">
+            <h2 class="section-title">Escolha Seu Plano</h2>
+            <div class="pricing-cards">
+                <div class="price-card fade-in delay-1">
+                    <h3>Básico</h3>
+                    <div class="price">
+                        R$ 197
+                        <span class="original-price">R$ 690</span>
+                    </div>
+                    <p style="color: var(--text-light); margin-bottom: 2rem;">Acesso vitalício</p>
+                    <ul>
+                        <li>Video-aulas completas</li>
+                        <li>Exercícios com soluções</li>
+                        <li>Comunidade privada</li>
+                        <li>Certificado digital</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="openModal()">Começar Agora</button>
+                </div>
+                <div class="price-card featured fade-in delay-2">
+                    <div class="price-badge">MAIS POPULAR</div>
+                    <h3>Profissional</h3>
+                    <div class="price">
+                        R$ 297
+                        <span class="original-price">R$ 990</span>
+                    </div>
+                    <p style="color: var(--text-light); margin-bottom: 2rem;">Acesso vitalício + bônus</p>
+                    <ul>
+                        <li>Tudo do plano básico</li>
+                        <li>Mentorias ao vivo (2x/mês)</li>
+                        <li>Code reviews personalizados</li>
+                        <li>Acesso ao job board exclusivo</li>
+                        <li>Templates e projetos avançados</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openModal()">Aproveitar Oferta</button>
+                </div>
+                <div class="price-card fade-in delay-3">
+                    <h3>Premium</h3>
+                    <div class="price">
+                        R$ 497
+                        <span class="original-price">R$ 1.490</span>
+                    </div>
+                    <p style="color: var(--text-light); margin-bottom: 2rem;">Acesso vitalício + VIP</p>
+                    <ul>
+                        <li>Tudo do plano profissional</li>
+                        <li>Mentorias ilimitadas</li>
+                        <li>Consultoria de carreira 1-1</li>
+                        <li>Acesso à comunidade VIP</li>
+                        <li>Recursos extras premium</li>
+                    </ul>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="openModal()">Quero Premium</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final-cta">
+        <h2>Não deixe este momento passar</h2>
+        <p>Oferta limitada a apenas 100 vagas com 70% de desconto. Após essa promoção, o preço volta ao normal.</p>
+        <div class="guarantee">
+            <h3>✓ Garantia de 30 dias</h3>
+            <p>Se não gostar pelos motivos que forem, devolvemos 100% do seu dinheiro. Sem perguntas incômodas.</p>
+        </div>
+        <button class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;" onclick="openModal()">
+            🔒 Garantir Minha Vaga Agora
+        </button>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Termos de Serviço</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Contato</a>
+                <a href="#">FAQ</a>
+            </div>
+            <p>&copy; 2026 CodeMaster. Todos os direitos reservados. | Desenvolvido com ❤️ para sua evolução</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE CADASTRO -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2>🎯 Garantir Minha Vaga</h2>
+            <p style="color: var(--text-light); margin-bottom: 2rem;">Inscreva-se agora e receba acesso à versão do curso com 70% de desconto</p>
+            
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nome Completo *</label>
+                    <input type="text" id="name" name="name" required placeholder="João Silva">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">WhatsApp *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(11) 99999-9999">
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Nível de Experiência *</label>
+                    <select id="experience" name="experience" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="iniciante">Iniciante (Nunca programei)</option>
+                        <option value="basico">Básico (Conheço HTML/CSS)</option>
+                        <option value="intermediario">Intermediário (Tenho experiência)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span>Concordo com os <a href="#" style="color: var(--primary-color);">termos de serviço</a> e <a href="#" style="color: var(--primary-color);">política de privacidade</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; font-size: 1.1rem;">
+                    Começar Meu Aprendizado
+                </button>
+
+                <p style="text-align: center; color: var(--text-light); font-size: 0.85rem; margin-top: 1rem;">
+                    ✓ Você receberá um link de acesso em seu email
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Funções do Modal
+        function openModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+
+        // Fechar modal ao pressionar ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Função para enviar formulário
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const experience = document.getElementById('experience').value;
+
+            // Simular envio (em produção, enviar para backend)
+            console.log({
+                name,
+                email,
+                phone,
+                experience,
+                timestamp: new Date()
+            });
+
+            // Mostrar mensagem de sucesso
+            alert('✓ Inscrição realizada com sucesso! Verifique seu email para acessar o curso.');
+            
+            // Fechar modal e limpar formulário
+            closeModal();
+            document.querySelector('form').reset();
+        }
+
+        // Scroll suave para seções
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Animação ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observar cards ao carregar
+        document.querySelectorAll('.benefit-card, .testimonial-card, .price-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Validação de email em tempo real
+        document.getElementById('email')?.addEventListener('blur', (e) => {
+            const email = e.target.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                e.target.style.borderColor = '#ef4444';
+            } else {
+                e.target.style.borderColor = '#cbd5e1';
+            }
+        });
+
+        // Contador de vagas dinâmico
+        let vagas = 100;
+        function updateVagas() {
+            const randomDecrement = Math.floor(Math.random() * 3) + 1;
+            if (vagas > 5) {
+                vagas -= randomDecrement;
+                // Você pode atualizar a UI aqui se desejar mostrar vagas restantes
+            }
+        }
+
+        // Atualizar vagas a cada minuto
+        setInterval(updateVagas, 60000);
+    </script>
+</body>
+</html>
